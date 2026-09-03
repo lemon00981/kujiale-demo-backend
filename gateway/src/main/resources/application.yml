@@ -1,0 +1,33 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: gateway
+  cloud:
+    gateway:
+      routes:
+        # AI 服务（Python FastAPI），直连 URL，不注册进 Eureka
+        - id: ai-service
+          uri: http://localhost:8000
+          predicates:
+            - Path=/api/ai/**
+        # 业务服务（design-service），走 Eureka 服务发现 + 负载均衡
+        - id: design-service
+          uri: lb://design-service
+          predicates:
+            - Path=/api/**
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            maxAge: 3600
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    prefer-ip-address: true
