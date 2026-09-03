@@ -79,10 +79,10 @@ WHERE NOT EXISTS (SELECT 1 FROM `kjl_user` WHERE `username` = 'demo');
 
 INSERT INTO `kjl_house_type` (`name`, `area`, `layout_json`, `created_at`)
 SELECT * FROM (
-  SELECT '三室两厅', 90.0, '{"rooms":["客厅","主卧","次卧","书房","厨房","卫生间"]}', NOW(6)
+  SELECT '三室两厅', 90.0, '{"rooms":[{"name":"客厅","x":0,"z":0,"w":4,"d":3},{"name":"厨房","x":4,"z":0,"w":2,"d":3},{"name":"卫生间","x":6,"z":0,"w":2,"d":3},{"name":"主卧","x":0,"z":3,"w":2.7,"d":3},{"name":"次卧","x":2.7,"z":3,"w":2.7,"d":3},{"name":"书房","x":5.4,"z":3,"w":2.6,"d":3}]}', NOW(6)
   UNION ALL
-  SELECT '两室一厅', 70.0, '{"rooms":["客厅","主卧","次卧","厨房","卫生间"]}', NOW(6)
+  SELECT '两室一厅', 70.0, '{"rooms":[{"name":"客厅","x":0,"z":0,"w":4,"d":3},{"name":"厨房","x":4,"z":0,"w":2.5,"d":3},{"name":"卫生间","x":6.5,"z":0,"w":1.5,"d":3},{"name":"主卧","x":0,"z":3,"w":4,"d":3},{"name":"次卧","x":4,"z":3,"w":4,"d":3}]}', NOW(6)
   UNION ALL
-  SELECT '一室一厅', 45.0, '{"rooms":["客厅","卧室","厨房","卫生间"]}', NOW(6)
+  SELECT '一室一厅', 45.0, '{"rooms":[{"name":"客厅","x":0,"z":0,"w":5,"d":3.5},{"name":"卧室","x":0,"z":3.5,"w":3.5,"d":2.5},{"name":"厨房","x":5,"z":0,"w":3,"d":3},{"name":"卫生间","x":3.5,"z":3.5,"w":2,"d":2.5}]}', NOW(6)
 ) AS t
 WHERE NOT EXISTS (SELECT 1 FROM `kjl_house_type`);
